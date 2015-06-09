@@ -1,0 +1,416 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title enterJS - Polymer ES6
+
+    link(rel='stylesheet', type='text/css', href='build/build.css')
+  body
+
+    article
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Pragmatic Gulp
+        pre
+          code.language-javascript const gulp=require('gulp'),
+            |       minify=require('gulp-minify-css');
+            | gulp.task('styles', ()=>
+            |   gulp.src('./style.css')
+            |     .pipe(minify())
+            |     .pipe(gulp.dest('./dist/'))
+            | );
+            | gulp.task('default', ['styles']);
+
+      section.intro
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 About me
+        h2 Lars Gersmann
+        h3 working at <a href="http://cm4all.com">Content Management AG</a>
+        h6 AngularJS, Node.js, Gulp, ES6, HTML5 / Less.js, Sass / Docker / Bleeding edge browser technologies
+
+      section.gulp-vs-grunt
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1
+          span.gulp Gulp 
+          span vs 
+          span.grunt Grunt
+        ul
+          li 
+            span.gulp Gulp scripts gets coded
+            span , 
+            span.grunt Grunt gets configured
+          li 
+            span.gulp Gulp is tiny
+          li 
+            span.gulp Gulp scripts are better readable
+          li 
+            span.gulp parallel execution of tasks when possible
+          li 
+            span.gulp Gulp <strong>outperforms</strong> 
+            span.grunt Grunt
+          li 
+            span Plugins : 
+            span.gulp plain Javascript functions 
+            span vs 
+            span.grunt plugin interface
+          li 
+            span.gulp Gulp supports <em>inline/one shot plugins</em>
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Gulp Features
+        ul
+          li concurrent task execution
+          li <strong>very fast</strong> processing
+          li Gulp is just <strong>Javascript</strong>
+          li Tasks may return 
+            a(href='https://nodejs.org/api/stream.html') Stream
+            span , 
+            a(href='https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise') ES6 Promise 
+            span or call NodeJS style callbacks
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Architecture
+        ul
+          li
+            a(href='https://github.com/orchestrator/orchestrator') Orchestrator
+          li
+            a(href='https://github.com/wearefractal/vinyl') Vinyl Filesystem
+          li
+            a(href='https://nodejs.org/api/stream.html') NodeJS Stream API
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 The dark side
+        ul
+          li concurrent execution is complex and error-prone
+          li Gulp gets slow when using the <strong>wrong plugins</strong>
+          li
+            span NodeJS 
+            a(href='https://nodejs.org/api/stream.html') Streams API
+            are unknown to most Gulp users
+          li Object vs String/Buffer Streams 
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 Use ES6 in Gulp
+        h6 shorter/readable Gulp scripts
+        pre
+          code.language-javascript 
+            |  // Gulpfile.js
+            |require("babel/register")({ extensions: ['.es6'] });
+            |require('./tasks.es6');
+            |  // tasks.es6
+            |...
+            |gulp.task('clean', done=>del('dist', done));
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 Minimize dependencies
+        
+        ul
+          li Keep dependencies as small as possible
+          li Less dependencies make code more stable
+          li API's of dependencies will change => adaption cost time
+          li depend on tools, not wrappers
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 Learn Gulp's building blocks
+
+        p
+          h5 Take control over Gulp tasks
+                
+        p
+          span using 
+          a(href='https://github.com/orchestrator/orchestrator') Orchestrator
+          span , 
+          a(href='https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise') ES6 Promise 
+          span and 
+          a(href='https://nodejs.org/api/stream.html') Streams 
+          
+        h5 Learning ends in knowledge. Knowledge is power.
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 Learn Gulp's building blocks
+
+        h5
+          span Gulp === 
+          a(href='https://github.com/orchestrator/orchestrator') Orchestrator 
+          span + some peanuts
+                  
+        pre
+          code.language-javascript
+            | // remember that ?
+            |const Orchestrator = require('orchestrator');
+            |let o = new Orchestrator();
+            |o.add('mytask', ['array', 'of', 'task', 'names'], ()=>{
+            |  // Do stuff
+            |});
+            |o.start();
+          
+                    
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 Learn Gulp's building blocks
+
+        h5
+          a(href='https://nodejs.org/api/stream.html') Streams 
+          span : unix pipes that let you easily read data from a source and pipe it to a destination.
+          
+        p
+          ul
+            li 
+              a(href='https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpsrcglobs-options') gulp.src 
+              span and 
+              a(href='https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpdestpath-options') gulp.dest 
+              span are just 
+              a(href='https://nodejs.org/api/stream.html') Streams 
+            li Object vs Buffer mode
+            li read vs. write vs. duplex 
+              a(href='https://nodejs.org/api/stream.html') Streams 
+            li Transformation / Piping (use 
+              a(href='https://github.com/rvagg/through2') through2 
+              span , 
+              a(href='https://github.com/dominictarr/event-stream') event-stream
+              span )
+            li
+              a(href='http://highlandjs.org/') highlandjs
+              span The high-level streams library for Node.js and the browser.
+            li 
+              span read more here : 
+              a(href='https://github.com/substack/stream-handbook') Node Stream Cookbook 
+              span and 
+              a(href='https://medium.com/@webprolific/getting-gulpy-a2010c13d3d5') Getting gulpy
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 Learn Gulp's building blocks
+
+        h5 
+          a(href='https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise') Promise 
+          span : represents a value that may not be available yet. 
+        
+        pre
+          code.language-javascript
+            |const promisify=stream=>new Promise((resolve, reject)=>stream
+            |.on('end', resolve)
+            |.on('error', reject)); 
+            | 
+            |gulp.task('download', [], ()=>
+            |  fetch("http://host/endpoint").then(data=>promisify(mystream(data)))
+            |);
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 Dont' reinvent the wheel
+        
+        p Look at
+        
+        p
+          a(href='https://github.com/gulpjs/gulp/tree/master/docs/recipes') Gulp receipes
+        p
+          a(href='http://stackoverflow.com') Stackoverflow
+        p Search the net
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 Use tools instead of plugins
+        h5 Direct tool usage is often shorter and better testable. Better tool version control. Option naming.
+        pre
+          code.language-javascript 
+            |gulp.src("src/app.js")
+            |.pipe(babel())
+            |.pipe(gulp.dest("dist"));
+        span vs. 
+        pre
+          code.language-javascript
+            | shell.task('babel src/app.js -o dist/app.js');
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements 
+        h2 Inline simple tasks
+        h5 You don’t need a plugin for everything
+        pre
+          code.language-javascript 
+            |gulp.src(['src/**/*.js'])
+            |.pipe(through2.obj((file, enc, done)=>{
+            |  file.contents=new Buffer(HEADER + file.contents);
+            |  done(null, file);
+            |}))
+            |.pipe(gulp.dest('dist/src'));
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 Write your tests in ES6
+        pre
+          code.language-javascript 
+            |import A from '../src/a.es6';
+            |describe('A', ()=>{
+            |  it('constructor', ()=>{
+            |    let a = new A('foo');
+            |    expect(a.name).toEqual('foo');
+            |  });
+            |});
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Demo time !
+        h5 Example project can be downloaded at 
+          a(href='https://github.com/lgersman/enterjs2015-pragmatic_gulp.git') GitHub
+          
+        p
+          h5 
+            a(href='https://github.com/lgersman/enterjs2015-pragmatic_gulp.git') https://github.com/lgersman/enterjs2015-pragmatic_gulp.git
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 Use ONE test framework
+        h5 Create understandable, reproducable, DRY tests
+        
+        p
+        
+        p
+          a(href='http://jasmine.github.io/2.0/introduction.html') Jasmine 
+          span is simple
+          p vs.
+          div
+            a(href='http://mochajs.org/') Mocha
+            span /
+            a(href='http://chaijs.com/') Chai 
+            span is flexible 
+            
+        h5 Simplicity over Flexibility
+
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 Lint is your friend
+        h6 Linting speeds up development time
+        pre
+          code.language-javascript
+            |src/a.es6
+            |  5:4  error  foo was used before it was defined  no-use-before-define
+            |  7:8  error  fool is defined but never used      no-unused-vars
+
+        h6 Use 
+          a(href='http://eslint.org/') Lint 
+          span instead of a debugging stupid typo's
+        
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 Test while developing
+        h6 Run tests before building if possible
+        pre
+          code.language-javascript
+            |watchy -w . -i '/dist|dist/.*/' -- gulp test:node
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 Force self contained projects
+        h5 Depend always on local packages
+        
+        p
+          ul
+            li provide a hassle free <code>npm install</code> experience
+            li Global packages will result in version conflicts
+            li Prevent the <em>Elfenbeinturm</em> syndrom
+            li 
+              a(href='https://github.com/creationix/nvm') NVM 
+              span makes you NodeJS version independent
+        
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 
+          a(href='http://techcrunch.com/2009/04/28/keep-it-simple-stupid/') KISS
+        h5 Keep it Simple, Stupid. Encapsulate often used complex commands.
+        
+        pre
+          code.language-javascript
+            |"scripts": {
+            |  "tdd"  : "node_modules/.bin/watchy -w . -i '/dist|dist/.*/' -- ...",
+            |  "build": "node_modules/.bin/gulp test"
+            |},
+
+        pre
+          code.language-javascript
+            |npm run tdd
+            
+        h5 Your colleagues will thank you.
+        
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Improvements
+        h2 README.md
+        h5 Provide a README.md
+          
+        p
+          ul
+            li Document just important things
+            li 'Brevity is the soul of wit.'
+          
+        h5 Just a simple thing saving hours.
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Insiders' tip
+        h2 
+          a(href='https://about.gitlab.com/downloads/') GitLab CE
+        h5 Keep your source code in house - Open source GitHub alike for your company. 
+          
+        p
+          ul
+            li <em>Just like GitLab</em> user experience
+            li Speeds up productivity
+            li Issue management/Wiki/etc ! 
+            li Dead simple local installation
+            li Searching over all projects
+            li Bonus : Drop in 
+              a(href='https://about.gitlab.com/gitlab-ci/') GitLab CI 
+              span (even Open source) to add professional grade <strong>continuous integration</strong> and <strong>test capabilities</strong>
+            
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Questions ?
+
+      section
+        h6 enterJS 2015 - Pragmatic Gulp (hosted by Lars Gersmann)
+        h1 Fini
+        h2 Thank you !!
+        
+        p
+          h5 Slides will be available at 
+            a(href='http://orangevolt.blogspot.com') orangevolt.blogspot.com
+        
+        p
+          h5 Contact : 
+            a(href='mailto://lars.gersmann@gmail.com') lars.gersmann@gmail.com
+            
+        p
+          h5 Github : 
+            a(href='https://github.com/lgersman') github.com/lgersman
+        
+        p
+          h6 Content Management AG : 
+            a(href='https://cm4all.com') www.cm4all.com
+
+    script(src='build/build.js')
+
