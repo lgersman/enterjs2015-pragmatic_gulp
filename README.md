@@ -1,5 +1,4 @@
-# Hello World
-> A [Bespoke.js](http://markdalgleish.com/projects/bespoke.js) presentation, built with [generator-bespoke](https://github.com/markdalgleish/generator-bespoke)
+demo project to this slides can be found at https://github.com/lgersman/enterjs2015-pragmatic_gulp_demo
 
 ## View slides locally
 
