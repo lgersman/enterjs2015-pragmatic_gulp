@@ -13,6 +13,7 @@
     "bespoke-scale": "^1.0.0",
     "bespoke-theme-cube": "^2.0.0",
     "bespoke-touch": "^1.0.0",
+    "bower": "^1.4.1",
     "debowerify": "^0.7.1",
     "del": "^1.1.1",
     "gh-pages": "^0.2.0",
@@ -31,8 +32,8 @@
     "opn": "^0.1.2",
     "through": "^2.3.4"
   },
-  "scripts" : {
-    "serve" : "node_modules/.bin/gulp serve"
+  "scripts": {
+    "serve": "node_modules/.bin/gulp serve"
   },
   "description": "slides for  [enterJS 2015 talk Pragmatic Gulp](http://www.enterjs.de/abstracts#pragmatic-gulp)",
   "engines": {
